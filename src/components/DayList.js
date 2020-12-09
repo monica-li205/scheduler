@@ -4,28 +4,8 @@ import DayListItem from "components/DayListItem.js"
 
 
 export default function DayList(props) {
-  const days = [
-    {
-      id: 1,
-      name: "Monday",
-      spots: 2,
-    },
-    {
-      id: 2,
-      name: "Tuesday",
-      spots: 5,
-    },
-    {
-      id: 3,
-      name: "Wednesday",
-      spots: 0,
-    },
-  ];
-  // const newItems = [];
-  // for (const day of days) {
-  //   newItems.push(DayListItem(day));
-  // } 
-  const newItems = days.map(day => 
+
+  const newItems = props.days.map(day => 
     <DayListItem
       name={day.name}
       spots={day.spots}
