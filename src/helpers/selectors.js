@@ -22,3 +22,18 @@ export function getAppointmentsForDay(state, day) {
   }
   return apptsForTheDay;
 }
+
+export function getInterview(state, interview) {
+  let newObj = {};
+  if (!interview) {
+    return null;
+  } else {
+    for (let interviewer in state.interviewers) {
+      if (interview.interviewer === state.interviewers[interviewer].id) {
+        newObj.student = interview.student
+        newObj.interviewer = state.interviewers[interviewer]
+        return newObj;
+      }
+    }
+  }
+}
