@@ -1,4 +1,9 @@
-import React, { useState } from "react";import DayList from "components/DayList.js"
+import React, { useState, useEffect, axios } from "react";
+import "components/Application.scss";
+import "components/Appointment/styles.scss";
+import "components/Appointment"
+import DayList from "components/DayList.js"
+import Appointment from "components/Appointment/index";
 const appointments = [
   {
     id: 1,
@@ -53,8 +58,6 @@ const appointments = [
     }
   }
 ];
-import "components/Application.scss";
-import "components/Appointment"
 
 const days = [
   {
@@ -73,8 +76,13 @@ const days = [
     spots: 0,
   },
 ];
+
 export default function Application(props) {
   const [day, setDay] = useState("Monday");
+  
+  const newAppts = appointments.map(appointment => 
+      <Appointment key={appointment.id} {...appointment} />
+    );
 
   return (
     <main className="layout">
@@ -99,7 +107,8 @@ export default function Application(props) {
       />
       </section>
       <section className="schedule">
-        
+        {newAppts}
+        <Appointment key="last" time="5pm" />
       </section>
     </main>
   );
