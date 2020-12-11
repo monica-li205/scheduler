@@ -23,6 +23,27 @@ export function getAppointmentsForDay(state, day) {
   return apptsForTheDay;
 }
 
+export function getInterviewersForDay(state, day) {
+  let interviewersForTheDay = [];
+  let index = 0;
+
+  if (!state.days.length) {
+    return [];
+  } else {
+    while (index < state.days.length) {
+      if (state.days[index].name === day) {
+        const currentday = state.days.filter(item => item.name === day);
+        const currentDayInterviewers = currentday[0].interviewers;
+        for (let interviewer of currentDayInterviewers) {
+          interviewersForTheDay.push(state.interviewers[interviewer]);
+        }
+      }
+      index++;
+    }
+  }
+  return interviewersForTheDay;
+}
+
 export function getInterview(state, interview) {
   let newObj = {};
   if (!interview) {
