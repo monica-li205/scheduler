@@ -10,8 +10,10 @@ const EMPTY = "EMPTY";
 const SHOW = "SHOW";
 const CREATE = "CREATE";
 const SAVING = "SAVING";
+const DELETING = "DELETING"
 
 export default function Appointment (props) {
+  // console.log("appt props", props);
   const { mode, transition, back } = useVisualMode(
     props.interview ? SHOW : EMPTY
   );
@@ -23,9 +25,15 @@ export default function Appointment (props) {
       interviewer
     };
     props.bookInterview(props.id, interview)
-    transition(SHOW)
+    .then(()=> { transition(SHOW) });
   }
   
+  function deleteAppt() {
+    transition(DELETING);
+    props.cancelInterview(props.id)
+    .then(() => { transition(EMPTY) });
+  }
+
   return (
   <article className="appointment" >
     <Header time={props.time}/>
@@ -37,6 +45,7 @@ export default function Appointment (props) {
       interview={props.interview}
       interviewers={props.interviewers}
       interviewer={props.interview.interviewer.name}
+      onDelete={deleteAppt}
     />
     )}
     {mode === CREATE && 
@@ -49,8 +58,8 @@ export default function Appointment (props) {
       bookInterview={props.bookInterview}
       onCancel={() => back(EMPTY)}
     />}
-    {mode === SAVING && 
-    <Status message={props.message}/>}
+    {mode === SAVING && <Status message='Saving...'/>}
+    {mode === DELETING && <Status message='Deleting...'/>}
   </article>
   )
 }
