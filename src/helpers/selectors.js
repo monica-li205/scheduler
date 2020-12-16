@@ -60,6 +60,8 @@ export function getInterview(state, interview) {
 }
 
 export function getSpotsForDay (state, dayName) {
-  return state.days.find((day) => { return day.name = dayName })
-    .appointments.filter((appointment) => { return state.appointments[appointment].interview === null}).length
+  const activeDay = state.days.find((day) => { return day.name === dayName }).appointments.filter((appointment) => { return state.appointments[appointment].interview === null}).length;
+  console.log("active", activeDay)
+  return activeDay;
+    
 }

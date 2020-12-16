@@ -65,7 +65,6 @@ export default function Appointment (props) {
       interviewer={null}
       interview={props.interview}
       onSave={save}
-      bookInterview={props.bookInterview}
       onCancel={() => back()}
     />}
     {mode === EDIT &&
@@ -76,7 +75,6 @@ export default function Appointment (props) {
       interview={props.interview}
       name={props.interview.student}
       onSave={save}
-      bookInterview={props.bookInterview}
       onCancel={() => back()}
     />}
     {mode === SAVING && <Status message='Saving...' />}

@@ -4,7 +4,7 @@ import { getSpotsForDay } from "helpers/selectors";
 
 export default function useApplicationData() {
   // console.log("useAppData")
-
+  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -18,50 +18,67 @@ export default function useApplicationData() {
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      // console.log("get", all)
       setState(prev => ({
         ...prev, 
         days: all[0].data, 
         appointments: all[1].data, 
-        interviewers: all[2].data }))
-    })
-  }, [])
+        interviewers: all[2].data 
+      }))
+      })
+    }, [])
+    console.log("state initial", state);
 
-  // console.log(getSpotsForDay(state, "Tuesday"));
   const setDay = day => { 
-    return setState({ ...state, day })
+    setState({ ...state, day })
+    console.log("dayset", state, day)
   }
-
-  const bookInterview = function(id, interview) {
   
+  const bookInterview = function(id, interview) {
+    console.log("id", id);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview }
     };
+
     const appointments = {
       ...state.appointments,
       [id]: appointment
     };
-    
-    // console.log("interview", state.day)
-    // console.log('spots', state.days[dayId].spots)
-    // console.log("length", appointments);
+    // console.log("state before", state)
+
     return axios.put(`/api/appointments/${id}`, { interview })
-    .then(() => { setState({...state, appointments }) })
+    // .then(() => {
+    //   console.log("days", days)
+    //   const newState = {...state, appointments }; 
+    //   const days = state.days.map((day)=> { 
+    //     if(day.name === state.day) {
+    //       day.spots = getSpotsForDay(newState, state.day);
+    //       console.log("getspots", getSpotsForDay(state, state.day) )
+    //       return day;
+    //     } else {
+    //       return day
+    //     }
+    //   })
+    //   setState((state) => ({...state, appointments, days })) 
+    //   // console.log("spots", getSpotsForDay(state, state.day));
+    //   // console.log("state", state)
+    // })
     .then(()=> { 
       const newState = { ...state, appointments }
       const days = state.days.map((day) => {
+        console.log("day", day.name, "state", state.day)
         if(day.name === state.day) {
+          console.log("spots", getSpotsForDay(newState, state.day));
           return {
             ...day,
-            spots: getSpotsForDay(newState, state.day)
+            spots: getSpotsForDay(newState, day.name)
           }
         } else {
           return day;
         }
       })
-      setState({...state, appointments, days}) 
-    })
+      setState((state) => ({...state, appointments, days })) 
+  })
   }
   
   const cancelInterview = function(id) {
@@ -70,25 +87,26 @@ export default function useApplicationData() {
       interview: null
     };
   
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+    // const appointments = {
+    //   ...state.appointments,
+    //   [id]: appointment
+    // };
     return axios.delete(`/api/appointments/${id}`)
-    .then(()=> { 
-      const newState = { ...state, appointments }
-      const days = state.days.map((day) => {
-        if(day.name === state.day) {
-          return {
-            ...day,
-            spots: getSpotsForDay(newState, state.day)
-          }
-        } else {
-          return day;
-        }
-      })
-      setState({...state, appointments, days}) 
-    })
+
+    // .then(()=> { 
+    //   const newState = { ...state, appointments }
+    //   const days = state.days.map((day) => {
+    //     if(day.name === state.day) {
+    //       return {
+    //         ...day,
+    //         spots: getSpotsForDay(newState, state.day)
+    //       }
+    //     } else {
+    //       return day;
+    //     }
+    //   })
+    //   setState({...state, appointments, days}) 
+    // })
   }
 
   const data = 
