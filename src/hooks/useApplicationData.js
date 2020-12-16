@@ -3,7 +3,7 @@ import axios from "axios";
 import { getSpotsForDay } from "helpers/selectors";
 
 export default function useApplicationData() {
-  console.log("useAppData")
+  // console.log("useAppData")
 
   const [state, setState] = useState({
     day: "Monday",
@@ -18,7 +18,7 @@ export default function useApplicationData() {
       axios.get('/api/appointments'),
       axios.get('/api/interviewers')
     ]).then((all) => {
-      console.log("get", all)
+      // console.log("get", all)
       setState(prev => ({
         ...prev, 
         days: all[0].data, 
@@ -27,7 +27,7 @@ export default function useApplicationData() {
     })
   }, [])
 
-  
+  // console.log(getSpotsForDay(state, "Tuesday"));
   const setDay = day => { 
     return setState({ ...state, day })
   }
@@ -42,11 +42,10 @@ export default function useApplicationData() {
       ...state.appointments,
       [id]: appointment
     };
-    let dayId = 0;
     
-    console.log("interview", state.day)
-    console.log('spots', state.days[dayId].spots)
-    console.log("length", appointments);
+    // console.log("interview", state.day)
+    // console.log('spots', state.days[dayId].spots)
+    // console.log("length", appointments);
     return axios.put(`/api/appointments/${id}`, { interview })
     .then(() => { setState({...state, appointments }) })
     .then(()=> { 

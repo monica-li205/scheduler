@@ -44,11 +44,6 @@ export function getInterviewersForDay(state, day) {
   return interviewersForTheDay;
 }
 
-export function getSpotsForDay (state, dayName) {
-  return state.days.find((day) => { return day.name = dayName })
-    .appointments.filter((appointment) => { return state.appointments[appointment].interview === null}).length
-}
-
 export function getInterview(state, interview) {
   let newObj = {};
   if (!interview) {
@@ -62,4 +57,9 @@ export function getInterview(state, interview) {
       }
     }
   }
+}
+
+export function getSpotsForDay (state, dayName) {
+  return state.days.find((day) => { return day.name = dayName })
+    .appointments.filter((appointment) => { return state.appointments[appointment].interview === null}).length
 }

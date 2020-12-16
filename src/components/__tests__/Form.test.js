@@ -1,7 +1,6 @@
 import React from "react";
 
 import { render, cleanup } from "@testing-library/react";
-
 import Form from "components/Appointment/Form";
 import { fireEvent } from "@testing-library/react";
 
@@ -15,10 +14,6 @@ describe("Form", () => {
       avatar: "https://i.imgur.com/LpaY82x.png"
     }
   ];
-
-
-  
-
 
   it("renders without student name if not provided", () => {
     const { getByPlaceholderText } = render(
