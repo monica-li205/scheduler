@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getSpotsForDay } from "helpers/selectors";
 
+// sets state and sends state data to Aplication.js
 export default function useApplicationData() {  
   const [state, setState] = useState({
     day: "Monday",
@@ -10,6 +11,7 @@ export default function useApplicationData() {
     interviewers: {},
   })
 
+  // fetches data from server
   useEffect(()=> {  
     Promise.all([
       axios.get('/api/days'),
@@ -25,10 +27,11 @@ export default function useApplicationData() {
     });
   }, []);
 
+  // sets the current day in daylist component
   const setDay = day => { 
     setState({ ...state, day })
   };
-  
+  // books an interview and sets the new state
   const bookInterview = function(id, interview) {
     const appointment = {
       ...state.appointments[id],
@@ -56,7 +59,7 @@ export default function useApplicationData() {
       setState((state) => ({...state, appointments, days }));
     });
   };
-  
+  // removes an interview and sets the new state
   const cancelInterview = function(id) {
     const appointment = {
       ...state.appointments[id],

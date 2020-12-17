@@ -1,3 +1,4 @@
+// returns an array of the appointments for the selected day
 export function getAppointmentsForDay(state, day) {
   let apptsForTheDay = [];
   let index = 0;
@@ -19,6 +20,7 @@ export function getAppointmentsForDay(state, day) {
   return apptsForTheDay;
 };
 
+// returns an array of the interviewers for the selected day
 export function getInterviewersForDay(state, day) {
   let interviewersForTheDay = [];
   let index = 0;
@@ -40,6 +42,7 @@ export function getInterviewersForDay(state, day) {
   return interviewersForTheDay;
 };
 
+// returns an object containing the student name and the selected interviewer object for an interview
 export function getInterview(state, interview) {
   let newObj = {};
   if (!interview) {
@@ -55,6 +58,7 @@ export function getInterview(state, interview) {
   };
 };
 
+// returns the number of empty spots for a day
 export function getSpotsForDay (state, dayName) {
   const activeDay = state.days.find((day) => { return day.name === dayName })
   .appointments.filter((appointment) => { return state.appointments[appointment].interview === null}).length;

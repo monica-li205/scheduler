@@ -23,6 +23,8 @@ export default function Appointment (props) {
     props.interview ? SHOW : EMPTY
   );
   
+  // handles saving an appointment, transitioning between components after saving, 
+  // and sending the new appt data to the server
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -33,14 +35,16 @@ export default function Appointment (props) {
     .bookInterview(props.id, interview)
     .then(()=> { transition(SHOW) })
     .catch(() => { transition(ERROR_SAVE, true) });
-  }
+  };
   
+  // handles deleting an appointment, transitioning between components after deleting, 
+  // and deleting the appt data in the server
   function deleteAppt() {
     transition(DELETING, true);
     props.cancelInterview(props.id)
     .then(() => { transition(EMPTY) })
     .catch((err) => { transition(ERROR_DELETE, true) });
-  }
+  };
 
   return (
   <article className="appointment" data-testid="appointment" >
