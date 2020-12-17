@@ -7,7 +7,7 @@ export default function InterviewerListItem (props) {
   const interviewerItem = classnames('interviewers__item',
   {
     "interviewers__item--selected" : props.selected,
-  })
+  });
   
   return (
     <li className={interviewerItem} 
@@ -19,6 +19,5 @@ export default function InterviewerListItem (props) {
         />
     {props.selected && props.name}
   </li>
-  )
-
-}
+  );
+};

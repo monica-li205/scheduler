@@ -54,17 +54,16 @@ storiesOf("Button", module)
     },
   ];
 
-storiesOf("DayListItem", module) //Initiates Storybook and registers our DayListItem component
+storiesOf("DayListItem", module)
 .addParameters({
   backgrounds: [{ name: "dark", value: "#222f3e", default: true }]
-}) // Provides the default background color for our component
-.add("Unselected", () => <DayListItem name="Monday" spots={5} />) // To define our stories, we call add() once for each of our test states to generate a story
+}) 
+.add("Unselected", () => <DayListItem name="Monday" spots={5} />) 
 .add("Selected", () => <DayListItem name="Monday" spots={5} selected />) 
 .add("Full", () => <DayListItem name="Monday" spots={0} />)
 .add("Clickable", () => (
-  <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} /> // action() allows us to create a callback that appears in the actions panel when clicked
+  <DayListItem name="Tuesday" setDay={action("setDay")} spots={5} />
 ));
-
 
 storiesOf("DayList", module)
   .addParameters({
@@ -142,23 +141,18 @@ storiesOf("Appointment", module)
     backgrounds: [{ name: "white", value: "#fff", default: true }]
   })
   .add("Appointment", () => <Appointment />)
-  
   .add("Appointment with Time", () => 
     <Appointment 
     time="12pm"
-    />
-  )
-
+    />)
   .add("Header", () => 
   <Header 
   time="12pm"
   />)
-
   .add("Empty", () => 
   <Empty 
   onAdd={action("onAdd")}
   />)
-
   .add("Show", () => 
     <Show 
     student={""}
@@ -166,25 +160,21 @@ storiesOf("Appointment", module)
     onEdit={action("onEdit")}
     onDelete={action("onDelete")}
     />)
-
   .add("Confirm", () => 
     <Confirm 
     message="Delete the appointment?"
     onConfirm={action("onConfirm")}
     onCancel={action("onCancel")}
     />)
-
   .add("Status", () => 
     <Status 
     message="Deleting"
     />)
-
   .add("Error", () => 
   <Error 
   message="Could not delete appointment."
   onClose={action("onClose")}
   />)
-  
   .add("Create", () =>
   <Form
   interviewers={interviewers}
@@ -192,7 +182,6 @@ storiesOf("Appointment", module)
   onSave={action("onSave")}
   onCancel={action("onCancel")}
   />)
-  
   .add("Edit", () =>
   <Form
   name="Monica Li"
@@ -201,14 +190,12 @@ storiesOf("Appointment", module)
   onSave={action("onSave")}
   onCancel={action("onCancel")}
   />)
-
   .add("Appointment Empty", () => (
     <Fragment>
       <Appointment id={1} time="12pm" />
       <Appointment id="last" time="1pm" />
     </Fragment>
   ))
-
   .add("Appointment Booked", () => (
     <Fragment>
       <Appointment
@@ -218,4 +205,4 @@ storiesOf("Appointment", module)
       />
       <Appointment id="last" time="1pm" />
     </Fragment>
-  ))
+  ));

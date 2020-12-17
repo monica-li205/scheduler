@@ -1,7 +1,5 @@
 import React from "react";
-
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import Button from "components/Button";
 
 afterEach(cleanup);
@@ -35,7 +33,6 @@ it("renders a clickable button", () => {
   const { getByText } = render(
     <Button onClick={handleClick}>Clickable</Button>
   );
-
   const button = getByText("Clickable");
 
   fireEvent.click(button);
@@ -50,7 +47,6 @@ it("renders a disabled button", () => {
       Disabled
     </Button>
   );
-
   const button = getByText("Disabled");
 
   fireEvent.click(button);

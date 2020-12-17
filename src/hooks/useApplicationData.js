@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getSpotsForDay } from "helpers/selectors";
 
-export default function useApplicationData() {
-  
+export default function useApplicationData() {  
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -22,13 +21,13 @@ export default function useApplicationData() {
         days: all[0].data, 
         appointments: all[1].data, 
         interviewers: all[2].data 
-      }))
-      })
-    }, [])
+      }));
+    });
+  }, []);
 
   const setDay = day => { 
     setState({ ...state, day })
-  }
+  };
   
   const bookInterview = function(id, interview) {
     const appointment = {
@@ -43,7 +42,7 @@ export default function useApplicationData() {
 
     return axios.put(`/api/appointments/${id}`, { interview })
     .then(()=> { 
-      const newState = { ...state, appointments }
+      const newState = { ...state, appointments };
       const days = state.days.map((day) => {
         if(day.name === state.day) {
           return {
@@ -52,11 +51,11 @@ export default function useApplicationData() {
           }
         } else {
           return day;
-        }
-      })
-      setState((state) => ({...state, appointments, days })) 
-  })
-  }
+        };
+      });
+      setState((state) => ({...state, appointments, days }));
+    });
+  };
   
   const cancelInterview = function(id) {
     const appointment = {
@@ -71,7 +70,7 @@ export default function useApplicationData() {
 
     return axios.delete(`/api/appointments/${id}`)
     .then(()=> { 
-      const newState = { ...state, appointments }
+      const newState = { ...state, appointments };
       const days = state.days.map((day) => {
         if(day.name === state.day) {
           return {
@@ -80,11 +79,11 @@ export default function useApplicationData() {
           }
         } else {
           return day;
-        }
-      })
-      setState((state) => ({...state, appointments, days })) 
-    })
-  }
+        };
+      });
+      setState((state) => ({...state, appointments, days }));
+    });
+  };
 
   const data = 
   {

@@ -8,18 +8,18 @@ export default function Form (props) {
   const [error, setError] = useState("");
   
   const reset = function(){
-    setName("")
+    setName("");
     setInterviewer(null);
   }
 
   const cancel = function (){
-    reset()
-    props.onCancel()
+    reset();
+    props.onCancel();
   }
 
   const save = function() {
     if (validate()) {
-      props.onSave(name, interviewer)  
+      props.onSave(name, interviewer);  
     }
   }
 

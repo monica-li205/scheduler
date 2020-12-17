@@ -8,11 +8,12 @@ export default function DayListItem(props) {
   {
     "day-list__item--selected" : props.selected,
     "day-list__item--full" : !props.spots,
-  })
+  });
+
   const formatSpots = function(num) {
     let spotsMssg; 
     if (num > 2) {
-      spotsMssg = props.spots
+      spotsMssg = props.spots;
     }else if (num === 2) {
       spotsMssg = '2 spots remaining';
     } else if (num === 1) {
@@ -21,7 +22,7 @@ export default function DayListItem(props) {
       spotsMssg = 'no spots remaining';
     }
     return spotsMssg;
-  }
+  };
   
   return (
     <li className={daylist} onClick={() => props.setDay(props.name)} data-testid="daylist">
@@ -29,4 +30,4 @@ export default function DayListItem(props) {
       <h3 className="text--light">{formatSpots(props.spots)}</h3>
     </li>
   );
-}
+};
