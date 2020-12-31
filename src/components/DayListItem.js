@@ -13,7 +13,7 @@ export default function DayListItem(props) {
   const formatSpots = function(num) {
     let spotsMssg; 
     if (num > 2) {
-      spotsMssg = props.spots;
+      spotsMssg = `${props.spots} spots remaining`;
     }else if (num === 2) {
       spotsMssg = '2 spots remaining';
     } else if (num === 1) {
