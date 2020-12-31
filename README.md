@@ -5,6 +5,9 @@ Book your appointments with the Scheduler! Click the Add button on an empty time
 ## Setup
 
 Install dependencies with `npm install`.
+* axios
+* @testing-library/react-hooks
+* react-test-renderer
 
 ## Running Webpack Development Server
 
